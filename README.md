@@ -24,7 +24,9 @@ foo@bar:~$ sails lift
 #### Con Docker:
 ```bash
 foo@bar:~$ git clone https://git.snell.com.mx/ecorona/sailsjs-boilerplate.git
-foo@bar:~$ cd sailsjs-boilerplate/docker
+foo@bar:~$ cd sailsjs-boilerplate
+foo@bar:~$ npm i
+foo@bar:~$ cd docker
 foo@bar:~$ docker-compose build
 ```
 Editar: **config/datastores.js**
