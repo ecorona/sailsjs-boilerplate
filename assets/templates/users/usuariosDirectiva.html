@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="form-group">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputPerfil">Perfil</label>
+          <select class="form-control" ng-model="user.profile" name="profile" ng-options="perfil.nombre as perfil.nombre for perfil in perfiles" required><option value="">--Elige una opción--</option></select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputName">Nombre</label>
+          <input type="text" class="form-control" id="inputName" ng-model="user.fullName" placeholder="Nombre Completo" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputTel">Teléfono</label>
+          <input type="text" class="form-control" id="inputTel"  ng-model="user.telefono" placeholder="Teléfono">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail">Correo electrónico</label>
+          <input type="email" class="form-control" id="inputEmail"  ng-model="user.emailAddress" placeholder="Coorreo electrónico" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword">Contraseña</label>
+          <input type="password" class="form-control" id="inputPassword"  ng-model="user.password"  minlength="8" placeholder="Password">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword2">Confirmación Contraseña</label>
+          <input type="password" class="form-control" id="inputPassword2"  ng-model="password"  minlength="8" placeholder="Password">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="checkboxActivo">Activo: </label>
+          <input type="checkbox" id="checkboxActivo" name="activo" ng-model="user.activo">
+       </div>
+       <div class="form-group col-md-3">
+         <label for="checkboxMovil">Móvil: </label>
+         <input type="checkbox" id="checkboxMovil" name="movil" ng-model="user.movilAccess">
+      </div>
+     </div>
+  </form>
+  </div>
+</div>

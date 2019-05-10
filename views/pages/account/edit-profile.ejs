@@ -1,0 +1,71 @@
+<div id="edit-profile" ng-controller="editProfileController" ng-cloak class="ng-cloak">
+  <div class="container">
+    <titulo-pagina>
+      Actualizar mi información
+    </titulo-pagina>
+    <form ng-submit="trySubmit()">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card">
+            <h5 class="card-header">Foto de Perfil</h5>
+            <img ng-src="{{me.profilePicture}}?data={{random}}" class="card-img-top" alt="Picture" ng-if="me.profilePicture">
+            <img src="/images/user.jpg" class="card-img-top" alt="Picture" ng-if="!me.profilePicture">
+            <div class="card-body">
+              <label for="exampleFormControlFile1" class="btn btn-info btn-sm btn-block text-center">
+                <i class="fa fa-camera"></i> Seleccionar <span ng-if="me.profilePicture">Nueva</span> Foto
+              </label>
+              <input type="file" class="form-control-file" ng-hide="true" file-model="fotoperfil" id="exampleFormControlFile1"/>
+              <button type="button" ng-show="me.profilePicture" class="btn btn-danger btn-block btn-sm" name="button" ng-click="removeProfilePicture()">
+                <i class="fa fa-trash"></i> Quitar Foto
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="full-name">Nombre completo</label>
+                <input class="form-control" name="full-name" type="text"  ng-class="{'is-invalid' : formErrors.fullName}" ng-model="formData.fullName" placeholder="Pedro Pérez" autocomplete="name" autofocus>
+                <div class="invalid-feedback" ng-if="formErrors.fullName">Introduzca su nombre completo.</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="email-address">Correo electrónico</label>
+                <input class="form-control" id="email-address" name="email-address" type="email"  ng-class="{'is-invalid' : formErrors.emailAddress}" ng-model="formData.emailAddress" placeholder="usuario@dominio.com" autocomplete="email">
+                <div class="invalid-feedback" ng-if="formErrors.emailAddress">Debe ser un correo electrónico válido.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input class="form-control" name="telefono" type="text"  ng-class="{'is-invalid' : formErrors.telefono}" ng-model="formData.telefono" placeholder="9511230123" autocomplete="telefono" autofocus>
+                <div class="invalid-feedback" ng-if="formErrors.telefono">Introduzca su teléfono celular a 10 dígitos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="text-danger" ng-if="cloudError === 'emailAlreadyInUse'">Ya existe una cuenta con ese correo electrónico.</p>
+          <p class="text-danger" ng-if="cloudError && cloudError !== 'emailAlreadyInUse'">Ocurrió un error al procesar su solicitud.<br>Pruebe intentarlo de nuevo, si el problema persiste porfavor<a href="/support">contacte a soporte</a>.</p>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <a class="btn btn-outline-info" href="/account"><i class="fa fa-arrow-left" aria-hidden></i> Cancelar</a>
+            <button type="submit" class="btn btn-dark" ng-disabled="syncing">
+              <i ng-if="syncing" class="fa fa-spin fa-spinner" aria-hidden></i>
+              <span ng-if="!syncing"><i class="fa fa-save" aria-hidden></i> Guardar cambios</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

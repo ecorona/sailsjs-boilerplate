@@ -1,0 +1,120 @@
+<div id="permisos" ng-controller="permisosControllerView" ng-cloak ng-init="init()">
+    <!--
+    ██████  ███████ ██████  ███    ███ ██ ███████  ██████  ███████
+    ██   ██ ██      ██   ██ ████  ████ ██ ██      ██    ██ ██
+    ██████  █████   ██████  ██ ████ ██ ██ ███████ ██    ██ ███████
+    ██      ██      ██   ██ ██  ██  ██ ██      ██ ██    ██      ██
+    ██      ███████ ██   ██ ██      ██ ██ ███████  ██████  ███████
+  -->
+
+    <div class="container">
+      <titulo-pagina>
+        <div class="row">
+          <div class="col-11">Permisos</div>
+          <div class="col-1">
+            <button type="btn btn-sm btn-outline-info account-settings-button" title="Agregar permiso"
+              class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#myModal" ng-click="nuevaPersona();">
+              <i class="fa fa-plus" aria-hidden></i>
+            </button>
+        </div>
+        </div>
+      </titulo-pagina>
+      <div class="row separado">
+        <div class="col-4 offset-8">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Busqueda</label>
+            </div>
+            <input type="text" class="form-control" placeholder="Busqueda General" ng-model="searchGeneral">
+          </div>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Permiso</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Valor</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="permiso in permisos">
+            <td>{{permiso.nombre}}</td>
+            <td>{{permiso.categoria}}</td>
+            <td>{{permiso.descripcion}}</td>
+            <td>{{permiso.valor}}</td>
+            <td>
+              <button type="button" title="Editar permiso"
+                class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" ng-click="editar(permiso)">
+                <i class="fa fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-12">
+          <paginacion-directiva registros="permisos" modelo="permisos" search="searchGeneral" paginacion="paginacion" populate="" search-for="nombre categoria" 
+          opcion-cuantos="10 15 20 50" pag-pag="10" refresh-function="refreshGrid" datos-fecha="datosFecha"></paginacion-directiva>
+        </div>
+      </div>
+    </div>
+    <!--
+    ███    ███  ██████  ██████   █████  ██
+    ████  ████ ██    ██ ██   ██ ██   ██ ██
+    ██ ████ ██ ██    ██ ██   ██ ███████ ██
+    ██  ██  ██ ██    ██ ██   ██ ██   ██ ██
+    ██      ██  ██████  ██████  ██   ██ ███████
+    -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" ng-show="pestana=='agregar'"><i class="fa fa-plus-circle"></i> Agregar permiso</h4>
+            <h4 class="modal-title" ng-show="pestana=='editar'"><i class="fa fa-edit"></i> Editar permiso</h4>
+            <h4 class="modal-title" ng-show="pestana=='borrar'"><i class="fa fa-trash"></i> Borrar permiso</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="limpia();">&times;</button>
+          </div>
+          <form name="fromAgencia">
+            <modal-body>
+              <div class="container">
+                <div class="form-group">
+                  <form>
+                    <!--<h4 class="text-muted">Datos</h4>-->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label for="inputPermiso">Nombre Permiso</label>
+                          <input class="form-control" name="Permiso" type="text" id="inputPermiso"  ng-model="permiso.nombre" placeholder="Nombre del permiso" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputDes">Descripción</label>
+                          <input type="text" class="form-control" id="inputDes"  ng-model="permiso.descripcion" placeholder="Descripción" required>
+                        </div>
+                         <div class="form-group col-md-4">
+                           <label for="inputValor">Valor</label>
+                           <input type="text" class="form-control" id="inputValor" ng-model="permiso.valor" placeholder="a_valor" required>
+                       </div>
+                         <div class="form-group col-md-4">
+                           <label for="inputCat">Categoría</label>
+                           <input type="text" class="form-control" id="inputCat" ng-model="permiso.categoria" placeholder="Categoría" required>
+                       </div>
+                   </div>
+                </form>
+                </div>
+              </div>
+            </modal-body>
+          </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" data-dismiss="modal" title="Borrar permiso" ng-show="borrar" ng-click="borrarPermiso(permiso.id);">
+              <i class="fa  fa-trash" aria-hidden="true"></i>
+            </button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" title="Guardar" ng-disabled="!fromAgencia.$valid" ng-show="guardar" ng-click="guardarPermiso()"><i class="fa fa-save"></i></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="limpia()">Cancelar y Regresar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

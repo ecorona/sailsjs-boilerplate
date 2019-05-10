@@ -1,0 +1,19 @@
+{
+  "globals": {
+    "sails": true,
+    "supertest": true,
+    "agent": true,
+    "autenticado": true,
+    "ciudadano": true,
+    "csrfToken": true,
+    "describe": true,
+    "expect": true,
+    "testUser": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "_": true,
+    "async": true,
+  },
+
+}

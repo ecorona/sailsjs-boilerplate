@@ -1,0 +1,21 @@
+[id='500'] {
+  padding-top: 5px;
+  padding-bottom: 25px;
+
+  .container {
+    .container-md();
+  }
+
+  .mobile-spacer {
+    display: none;
+  }
+
+  @media (max-width: 540px) {
+    br {
+      display: none;
+    }
+    .mobile-spacer {
+      display: inline;
+    }
+  }
+}

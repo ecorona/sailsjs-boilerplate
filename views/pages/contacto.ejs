@@ -1,0 +1,53 @@
+<div id="contact" ng-controller="contactoController" ng-cloak class="ng-cloak">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6 text-left small-screen-center os-animation element-normal-bottom" data-os-animation="fadeInRight" data-os-animation-delay="0.3s">
+        <titulo-pagina ng-if="!cloudSuccess">
+          ¡Ponte en contacto con nostros!
+        </titulo-pagina>
+        <div class="contact-form" ng-if="!cloudSuccess">
+          <form ng-submit="trySubmit()">
+            <div class="form-group">
+              <label for="full-name">Nombre</label>
+              <input class="form-control" name="full-name" type="text" ng-class="{'is-invalid' : formErrors.fullName}" ng-model="formData.fullName" placeholder="Pedro Pérez" autocomplete="name" autofocus>
+              <div class="invalid-feedback" ng-if="formErrors.fullName">Proporcione su nombre completo.</div>
+            </div>
+            <div class="form-group">
+              <label for="email-address">Correo Electrónico</label>
+              <input class="form-control" name="email-address" type="email" ng-class="{'is-invalid' : formErrors.emailAddress}" ng-model="formData.emailAddress" placeholder="usuario@dominio.com" autocomplete="email">
+              <div class="invalid-feedback" ng-if="formErrors.emailAddress">Necesitamos un correo electrónico para poder responderle.</div>
+            </div>
+            <div class="form-group">
+              <label for="topic">Asunto</label>
+              <input class="form-control" name="topic" type="text" :class="[formErrors.topic ? 'is-invalid' : '']" ng-model="formData.topic" placeholder="Preguntar sus precios" autocomplete="none">
+              <div class="invalid-feedback" ng-if="formErrors.topic">El asunto o propósito de su mensaje.</div>
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea class="form-control" name="message" :class="[formErrors.message ? 'is-invalid' : '']" ng-model="formData.message" placeholder="¿Cuanto cuesta una hora de su asesoría?" autocomplete="none"></textarea>
+              <div class="invalid-feedback" ng-if="formErrors.message">Debe escribir uno.</div>
+            </div>
+            <p class="text-danger" ng-if="cloudError"><small>Ocurrió un error al procesar su solicitud.<br>Pruebe intentarlo de nuevo, si el problema persiste porfavor<a href="/support">contacte a soporte</a>.</small></p>
+            <div class="form-group">
+              <button type="submit" class="btn btn-dark btn-lg btn-block">
+                <i ng-if="syncing" class="fa fa-spinner fa-spin" aria-hidden></i>
+                <span ng-if="!syncing">Enviar mensaje</span>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="success-message" ng-if="cloudSuccess">
+          <img src="/images/sailsjs.svg" class="mx-auto" width="200" alt="">
+          <br>
+          <h3>¡Gracias por escribir!</h3>
+          <hr />
+          <p>Hemos recibido su mensaje, personal de nuestro equipo se pondrá en contacto con usted a la brevedad.</p>
+          <a href="/" class="btn btn-primary btn-sm"><i class="fas fa-angle-double-left" aria-hidden></i> Regresar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html ng-app="angularjs-app">
+
+<head>
+  <title>Mi aplicación SailsJS</title>
+
+  <% /* Viewport tag for sensible mobile support */ %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <% /*
+        Stylesheets
+        ========================
+
+        Stylesheets can be hard-coded as «link» tags, automatically injected
+        by the asset pipeline between "STYLES" and "STYLES END", or both.
+        (https://sailsjs.com/docs/concepts/assets/task-automation)
+    */ %>
+  <% /* Auto-injected «link» tags: */ %>
+  <!--STYLES-->
+  <link rel="stylesheet" href="/dependencies/alertify/alertify.min.css">
+  <link rel="stylesheet" href="/dependencies/alertify/bootstrap.min.css">
+  <link rel="stylesheet" href="/dependencies/bootstrap-4/bootstrap-4.css">
+  <link rel="stylesheet" href="/dependencies/fontawesome/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <!--STYLES END-->
+</head>
+
+<body>
+  <div id="page-wrap">
+
+    <header id="page-header" class="navbar navbar-expand-sm navbar-dark bg-dark flex-column flex-md-row justify-content-between">
+      <a class="navbar-brand mr-0" href="/">
+        <div style="padding:1px; background:white; width:25px;height:25px; float:left; border-radius:4px; padding:2px;">
+          <img src="/images/sails.svg" height="21" alt="" class="float-left">
+        </div>
+        &nbsp;
+        Mi aplicación SailsJS
+      </a>
+
+
+      <div class="navbar-nav flex-row ng-cloak" ng-cloak>
+      <!-- LOGGED-IN -->
+      <% if(me){ %>
+        <%if(me.perfil==="admin" || me.perfil==="superadmin"){%>
+        <div class="nav-item dropdown d-none d-sm-block">
+          <a class="nav-link dropdown-toggle" id="header-admin-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock" aria-hidden></i> Administración</a>
+          <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
+            <%if(me.perfil==="admin"){%>
+              <a class="dropdown-item" href="/admin/configuracion"><i class="fa fa-cogs" aria-hidden></i> Configuración</a>
+            <%}%>
+            <% if(me.perfil==="superadmin") {%>
+              <a class="dropdown-item" href="/admin/users"><i class="fa fa-users" aria-hidden></i> Usuarios</a>
+              <a class="dropdown-item" href="/admin/permisos"><i class="fas fa-unlock-alt" aria-hidden></i> Permisos</a>
+            <%}%>
+          </div>
+        </div>
+        <%}%>
+        <!-- Only in desktop nav -->
+        <div class="nav-item dropdown d-none d-sm-block">
+          <a class="nav-link dropdown-toggle" id="header-account-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Mi cuenta"><i class="fa fa-user-circle" aria-hidden></i></a>
+          <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
+            <a class="dropdown-item" href="/account"><i class="fa fa-cog" aria-hidden></i> Preferencias</a>
+            <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden></i> Salir</a>
+          </div>
+        </div>
+        <!-- Only in mobile nav -->
+        <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/account"><i class="fa fa-user-circle" aria-hidden></i> Mi cuenta</a>
+        <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/logout"><i class="fa fa-sign-out" aria-hidden></i> Salir</a>
+        <% } else { %>
+          <!-- LOGGED-OUT -->
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/contacto"><i class="fas fa-envelope" aria-hidden></i> Contacto</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/signup"><i class="fas fa-user-plus" aria-hidden></i> Registro</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/login"><i class="fas fa-sign-in-alt" aria-hidden></i> Iniciar Sesión</a>
+        <% } %>
+      </div>
+    </header>
+
+    <!-- Alert if email has not been confirmed -->
+    <% if(me&&me.emailChangeCandidate) { %>
+    <div class="container">
+      <div class="alert alert-secondary mt-2" role="alert">
+        El correo electrónico que cambió necesita ser verificado. <br>Es posible que su cuenta tenga acceso limitado hasta que sea verificada mediante el correo electrónico que se envió a <strong>
+          <%= me.emailChangeCandidate %></strong>, mientras tanto debe iniciar sesión con <strong>
+          <%= me.emailAddress %></strong>.
+      </div>
+    </div>
+    <% } else if(me&&me.emailStatus === 'unconfirmed') { %>
+    <div class="container">
+      <div class="alert alert-secondary mt-2" role="alert">
+        Su correo electrónico necesita ser verificado.<br> Es posible que su cuenta tenga acceso limitado hasta que sea verificada mediante el correo electrónico que se envió a <strong>
+          <%= me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress%></strong>.
+      </div>
+    </div>
+    <% } %>
+
+    <%- body %>
+
+    <footer id="page-footer" class="navbar navbar-light justify-content-between flex-row-reverse">
+      <div class="nav">
+        <small class="nav-item" ng-show="!app.es404">
+
+          <span class="nav-link text-info" title="{{app.conectado?'Conectado':'Conectando...'}}">
+            <i class="fas fa-spinner fa-spin" aria-hidden ng-show="!app.conectado"></i>
+            <i class="" ng-class="{'fas fa-plug':!app.conectado, 'fa fa-bolt':app.conectado }"></i>
+          </span>
+        </small>
+
+        <small class="nav-item">
+          <a href="/nosotros" class="nav-link text-info">
+            <span class="d-none d-sm-inline">
+              <%-appName%> <%-appVersion%>
+            </span>
+          </a>
+        </small>
+        <small class="nav-item"><a class="nav-link text-info" href="/nosotros"><span class="d-none d-sm-inline">Nosotros</span></a></small>
+        <small class="nav-item"><a class="nav-link text-info" href="/contacto"><span class="d-none d-sm-inline">Contacto</span></a></small>
+        <small class="nav-item"><a class="nav-link text-info" href="/terminos"><span class="d-none d-sm-inline">Términos de uso</span></a></small>
+        <small class="nav-item"><a class="nav-link text-info" href="/privacidad"><span class="d-none d-sm-inline">Política de Privacidad</span></a></small>
+        <% if(me) { %>
+          <small class="nav-item">
+            <a class="nav-link text-info" href="/logout">
+              <span class="d-none d-sm-inline">
+                Salir
+              <% if(me&&me.fullName) { %>
+              ( <%-me.fullName%> )
+              <%}%>
+              </span>
+            </a>
+          </small>
+        <% } %>
+
+      </div>
+    </footer>
+  </div>
+
+  <!--TEMPLATES-->
+  <script type="text/javascript" src="/jst.js"></script>
+  <!--TEMPLATES END-->
+
+  <% /*
+      Client-side JavaScript
+      ========================
+
+      Scripts can be hard-coded as «script» tags, automatically injected
+      by the asset pipeline between "SCRIPTS" and "SCRIPTS END", or both.
+      (https://sailsjs.com/docs/concepts/assets/task-automation)
+    */ %>
+
+  <% /* Delete the global `self` to help avoid client-side bugs.
+    (see https://developer.mozilla.org/en-US/docs/Web/API/Window/self) */ %>
+  <script>
+    delete window.self;
+  </script>
+
+  <script src="/dependencies/sails/sails.io.js" reconnection="false" autoconnect="false"></script>
+  <% /* Auto-injected «script» tags: */ %>
+  <!--SCRIPTS-->
+  <script src="/dependencies/lodash/lodash.js"></script>
+  <script src="/dependencies/jquery/jquery-3.3.1.min.js"></script>
+  <script src="/dependencies/angular/angular.min.js"></script>
+  <script src="/dependencies/sails/angular-sails.min.js"></script>
+  <script src="/dependencies/moment/min/moment.min.js"></script>
+  <script src="/dependencies/moment/locale/es.js"></script>
+  <script src="/dependencies/alertify/alertify.min.js"></script>
+  <script src="/dependencies/angular/angular-animate.min.js"></script>
+  <script src="/dependencies/angular/angular-resource.min.js"></script>
+  <script src="/dependencies/angular/angular-sanitize.min.js"></script>
+  <script src="/dependencies/bootstrap-4/bootstrap-4.bundle.js"></script>
+  <script src="/dependencies/lodash/dist/lodash.min.js"></script>
+  <script src="/js/app/app.js"></script>
+  <script src="/js/app/interceptor.js"></script>
+  <script src="/js/app/sockets.js"></script>
+  <script src="/js/directives/sistema/file-modelDirectiva.js"></script>
+  <script src="/js/directives/sistema/titulo-paginaDirectiva.js"></script>
+  <script src="/js/directives/users/usuariosDirectiva.js"></script>
+  <script src="/js/factorys/permisos/permisosFactory.js"></script>
+  <script src="/js/factorys/usuarios/usuariosFactory.js"></script>
+  <script src="/js/filters/generalesFilters.js"></script>
+  <script src="/js/pages/404.page.js"></script>
+  <script src="/js/pages/498.page.js"></script>
+  <script src="/js/pages/500.page.js"></script>
+  <script src="/js/pages/account/account-overview.page.js"></script>
+  <script src="/js/pages/account/edit-password.page.js"></script>
+  <script src="/js/pages/account/edit-profile.page.js"></script>
+  <script src="/js/pages/account/multifactor.page.js"></script>
+  <script src="/js/pages/account/telefono.page.js"></script>
+  <script src="/js/pages/account/validate-mfa.page.js"></script>
+  <script src="/js/pages/admin/catalogos/catalogos.page.js"></script>
+  <script src="/js/pages/admin/coleccion/coleccion.page.js"></script>
+  <script src="/js/pages/admin/configuracion.page.js"></script>
+  <script src="/js/pages/admin/definiciones/definiciones.page.js"></script>
+  <script src="/js/pages/admin/perfiles.page.js"></script>
+  <script src="/js/pages/admin/permisos/permisos.page.js"></script>
+  <script src="/js/pages/admin/users.page.js"></script>
+  <script src="/js/pages/contacto.page.js"></script>
+  <script src="/js/pages/dashboard/dashboard.page.js"></script>
+  <script src="/js/pages/entrance/confirmed-email.page.js"></script>
+  <script src="/js/pages/entrance/forgot-password.page.js"></script>
+  <script src="/js/pages/entrance/login.page.js"></script>
+  <script src="/js/pages/entrance/new-password.page.js"></script>
+  <script src="/js/pages/entrance/signup.page.js"></script>
+  <script src="/js/pages/home.page.js"></script>
+  <script src="/js/pages/nosotros.page.js"></script>
+  <script src="/js/pages/privacidad.page.js"></script>
+  <script src="/js/pages/terminos.page.js"></script>
+  <!--SCRIPTS END-->
+</body>
+
+</html>

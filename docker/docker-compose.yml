@@ -1,0 +1,26 @@
+version: "2"
+services:
+  app:
+    image: eecorona/sails:v1
+    container_name: app
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+    command: "sails lift"
+    volumes:
+      - "../:/server"
+    build: ./api
+    links:
+      - mongodb:mongodb
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    command: mongod --smallfiles
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

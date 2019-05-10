@@ -1,0 +1,131 @@
+<div id="users" ng-controller="usersController" ng-cloak ng-init="init()">
+<!--
+  ██    ██ ███████ ██    ██  █████  ██████  ██  ██████  ███████
+  ██    ██ ██      ██    ██ ██   ██ ██   ██ ██ ██    ██ ██
+  ██    ██ ███████ ██    ██ ███████ ██████  ██ ██    ██ ███████
+  ██    ██      ██ ██    ██ ██   ██ ██   ██ ██ ██    ██      ██
+   ██████  ███████  ██████  ██   ██ ██   ██ ██  ██████  ███████
+-->
+  <div class="container" ng-if="!openUser">
+    <titulo-pagina>
+      <div class="row">
+          <div class="col-11">Usuarios</div>
+        <div class="col-1">
+          <% if(me.profile==='super') {%>
+          <button type="button" title="Agregar usuario" class="btn btn-default btn-sm pull-right" ng-click="showUsuario()">
+            <i class="fa fa-plus" aria-hidden></i>
+          </button>
+          <%}%>
+        </div>
+      </div>
+    </titulo-pagina>
+
+    <div class="row separado">
+      <div class="col-3 offset-9">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Busqueda General" ng-model="searchGeneral">
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped separado">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Nombre</th>
+          <th>Perfil</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in usuarios">
+          <td>{{user.emailAddress}}</td>
+          <td>{{user.fullName}}</td>
+          <td>{{user.profile}}</td>
+          <td>
+            <button type="button" name="button" class="btn btn-primary btn-small" ng-click="showUsuario(user)">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button type="button" name="button" class="btn btn-info btn-small" ng-click="shownPermisos(user)">
+              <i class="fas fa-lock"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <paginacion-directiva registros="usuarios" modelo="user" url="/api/v1/admin/users/getall" search="searchGeneral" paginacion="paginacion" search-for="emailAddress fullName profile" opcion-cuantos="10 15 20 50" pag-pag="10" refresh-function="refreshGrid" datos-fecha="datosFecha"></paginacion-directiva>
+  </div>
+  <!--
+  ███    ███  ██████  ██████   █████  ██
+  ████  ████ ██    ██ ██   ██ ██   ██ ██
+  ██ ████ ██ ██    ██ ██   ██ ███████ ██
+  ██  ██  ██ ██    ██ ██   ██ ██   ██ ██
+  ██      ██  ██████  ██████  ██   ██ ███████
+  -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fa fa-plus-circle"></i> Agregar usuario</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <form name="frmUsuario">
+          <modal-body>
+            <div  class="form-group">
+                <usuario-directiva user="user"></usuario-directiva>
+            </div>
+          </modal-body>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" title="Guardar" ng-disabled="!frmUsuario.$valid"
+          ng-click="guardarUsuario()"><i class="fa fa-save"></i></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar y Regresar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--
+██████  ███████ ██████  ███    ███ ██ ███████  ██████  ███████
+██   ██ ██      ██   ██ ████  ████ ██ ██      ██    ██ ██
+██████  █████   ██████  ██ ████ ██ ██ ███████ ██    ██ ███████
+██      ██      ██   ██ ██  ██  ██ ██      ██ ██    ██      ██
+██      ███████ ██   ██ ██      ██ ██ ███████  ██████  ███████
+-->
+<div class="modal fade" id="myModalPermisos" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Categorias de Permisos</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <modal-body>
+        <div class="row">
+          <div class="col-10 offset-1">
+            <div class="categoria_permiso" ng-repeat="cat in permisos">
+              <div class="titulo_categoria_permiso" ng-click="cat[0].open=!cat[0].open">
+                <i class="fa" ng-class="{'fa-folder':cat[0].open, 'fa-folder-open':!cat[0].open}"></i>
+                {{cat[0].categoria}}
+                <i class="fa" ng-class="{'fa-caret-right':cat[0].open, 'fa-caret-down':!cat[0].open}"></i>
+              </div>
+              <div ng-show="!cat[0].open">
+                <div class="lista_permiso" ng-repeat="permiso in cat">
+                  <div class="label_permiso" ng-click="permiso.aplicado=!permiso.aplicado">
+                    <i class="fa fa-file-o"></i>
+                    {{permiso.nombre}}
+                  </div>
+                  <input type="checkbox" ng-model="permiso.aplicado" ng-change="cambioPermiso(permiso.valor)" class="elcheck">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </modal-body>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar y Regresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- END -->
+</div>
+
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

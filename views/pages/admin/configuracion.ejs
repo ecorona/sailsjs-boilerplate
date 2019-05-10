@@ -1,0 +1,121 @@
+<div id="configuracion" ng-controller="configuracionController" ng-cloak>
+  <div class="container">
+    <titulo-pagina>Configuración</titulo-pagina>
+
+    <form>
+
+      <div class="form-group row">
+        <label for="internalEmail" class="text-right col-sm-4 col-form-label">Email Interno</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" ng-model="configuracion.internalEmailAddress" id="internalEmail" placeholder="mail@dominio.com">
+          <p class="text-secondary small">Email desde donde se envian los correos (Ver configuración SMTP).</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="emailFromName" class="text-right col-sm-4 col-form-label">Nombre en Correo</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="configuracion.emailFromName" id="emailFromName" placeholder="Emails de misitio.com">
+          <p class="text-secondary small">Nombre que se usa para enviar los correos.</p>
+        </div>
+      </div>
+
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label text-right col-sm-4 pt-0">Mensajes Flash</legend>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" ng-model="configuracion.flashType" name="gridRadios" id="gridRadios1" value="alertify" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Alertify
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" ng-model="configuracion.flashType" name="gridRadios" id="gridRadios2" value="alert">
+              <label class="form-check-label" for="gridRadios2">
+                Bootstrap Alert
+              </label>
+            </div>
+            <p class="text-secondary small">Tipo de notificación usada por el sistema.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-group row">
+        <div class="text-right col-sm-4">Validar Email</div>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1" ng-model="configuracion.verifyEmailAddresses">
+            <label class="form-check-label small" for="gridCheck1">
+              Requiere configuración SMTP.
+            </label>
+          </div>
+          <p class="text-secondary small">Enviar un Email de validación para las cuentas.</p>
+        </div>
+      </div>
+      <div class="" ng-show="configuracion.verifyEmailAddresses">
+        <div class="row">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-8">
+            <h4>Configuración SMTP</h4>
+            <p class="text-secondary small">El sistema tiene la capacidad de enviar notificaciones por Email cuando la configuación SMTP está disponible.</p>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="smtpHost" class="text-right col-sm-4 col-form-label">Servidor SMTP</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model="configuracion.smtpHost" id="smtpHost" placeholder="smtp.dominio.com">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="smtpPort" class="text-right col-sm-4 col-form-label">Puerto SMTP</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" ng-model="configuracion.smtpPort" id="smtpPort" placeholder="587">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="text-right col-sm-4">Secure</div>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="segure" ng-model="configuracion.smtpSecure">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="text-right col-sm-4">Rechazar SSL no válidos.</div>
+          <div class="col-sm-8">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rejectUnauthorized" ng-model="configuracion.rejectUnauthorized">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="smtpUser" class="text-right col-sm-4 col-form-label">Usuario SMTP</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model="configuracion.smtpUser" id="smtpUser" placeholder="usuario">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="smtpPassword" class="text-right col-sm-4 col-form-label">Contraseña SMTP</label>
+          <div class="col-sm-8">
+            <input type="password" class="form-control" ng-model="configuracion.smtpPassword" id="smtpPassword" placeholder="••••••••">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+          <button type="submit" class="btn btn-primary" ng-click="save()">
+            <i class="fas fa-save" aria-hidden></i>
+            Guardar Opciones
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

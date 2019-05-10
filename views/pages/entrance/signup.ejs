@@ -1,0 +1,80 @@
+<div id="signup" ng-controller="signupController" ng-cloak class="ng-cloak">
+  <div class="container" ng-if="!cloudSuccess">
+    <div class="signup-form">
+      <titulo-pagina>
+        Solicitud de Acceso
+      </titulo-pagina>
+      <p class="text-center">¡Comencemos! Solo llevará un minuto.</p>
+      <hr />
+      <form name="signupForm" ng-submit="trySubmit()">
+        <div class="form-group">
+          <label for="full-name">Nombre</label>
+          <input class="form-control" type="text" ng-class="{'is-invalid':formErrors.fullName}" ng-model="formData.fullName" placeholder="Pedro Pérez Vásquez" autofocus name="fullName">
+          <div class="invalid-feedback" ng-if="formErrors.fullName">Porfavor ponga su nombre completo.</div>
+        </div>
+        <div class="form-group">
+          <label for="email-address">Origen</label>
+          <input class="form-control" type="text" ng-class="{'is-invalid': formErrors.origen}" ng-model="formData.origen" placeholder="Escuela (ITO), Empresa(TUVASA)" name="origen">
+          <div class="invalid-feedback" ng-if="formErrors.origen">Debe proporcionar un nombre de una empresa, dependencia, o institución de procedencia.</div>
+        </div>
+        <div class="form-group">
+          <label for="email-address">Teléfono</label>
+          <input class="form-control" type="text" ng-class="{'is-invalid': formErrors.telefono}" ng-model="formData.telefono" placeholder="9510001111" name="telefono">
+          <div class="invalid-feedback" ng-if="formErrors.telefono">Debe proporcionar un número de teléfono válido de 10 dígitos.</div>
+        </div>
+        <div class="form-group">
+          <label for="email-address">Email</label>
+          <input class="form-control" type="email" ng-class="{'is-invalid': formErrors.emailAddress}" ng-model="formData.emailAddress" placeholder="ejemplo@dominio.com" name="emailAddress">
+          <div class="invalid-feedback" ng-if="formErrors.emailAddress">Debe proporcionar un Email válido.</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input class="form-control" type="password" ng-class="{'is-invalid': formErrors.password}" ng-model="formData.password" placeholder="••••••••" name="password">
+          <div class="invalid-feedback" ng-if="formErrors.password">Debe escribir una contraseña segura.</div>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Validar Contraseña</label>
+          <input class="form-control" type="password" ng-class="{'is-invalid': formErrors.confirmPassword}" ng-model="formData.confirmPassword" placeholder="••••••••" name="confirmPassword">
+          <div class="invalid-feedback" ng-if="formErrors.confirmPassword">Su contraseña y la validación no coinciden.</div>
+        </div>
+        <div class="form-group form-check">
+          <input class="form-check-input" id="terms-agreement" type="checkbox" ng-model="formData.agreed" name="agreed">
+          <label for="terms-agreement" class="form-check-label" ng-class="{'text-danger' : formErrors.agreed}">
+            He leído y estoy de acuerdo con los <a target="_blank" href="/terms">términos del servicio</a>.
+          </label>
+          <div class="invalid-feedback" ng-if="formErrors.agreed">Debe marcar la casilla.</div>
+        </div>
+        <p class="text-danger" ng-if="cloudError==='emailAlreadyInUse'">
+          <small>
+            Al parecer ya existe una cuenta con ese correo o su cuenta aún no ha sido activada.
+            Si su cuenta ya fué activada y olvidó su contraseña, la puede recuperar <a href="password/forgot">aquí</a>.
+          </small>
+        </p>
+        <p class="text-danger" ng-if="cloudError && cloudError!=='emailAlreadyInUse'">
+          <small>
+            Ocurrió un error al procesar su solicitud.<br>Pruebe intentarlo de nuevo,
+             si el problema persiste porfavor <a href="/contacto">contacte a soporte</a>.
+          </small>
+        </p>
+        <div class="form-group">
+          <button type="submit" class="btn-dark btn-lg btn-block" ng-disabled="syncing">
+            <i ng-if="syncing" class="fa fa-spinner fa-spin" aria-hidden></i>
+            <span ng-if="!syncing">Crear Cuenta</span>
+          </button>
+        </div>
+      </form>
+      <p class="text-center">
+        ¿Ya tiene una cuenta? <a href="/login">Inicie sesión</a>
+      </p>
+    </div>
+  </div>
+  <div class="container" ng-if="cloudSuccess">
+    <h1 class="text-center">¡Verifique su correo!</h1>
+    <div class="success-message">
+      <hr />
+      <p>Hemos enviado un enlace a <strong>{{formData.emailAddress}}</strong> para verificar su cuenta.</p>
+      <p><a class="btn btn-outline-info" href="/">Regresar</a></p>
+    </div>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

@@ -1,0 +1,28 @@
+Si decides usar atom recomiendo instalar...
+
+$apm install atom-beautify atom-easy-jsdoc atom-fontawesome autocomplete-font-awesome lodash busy-signal color-picker csslint docblockr emmet favorites file-bookmark file-icons fonts highlight-selected intentions language-ejs language-markdown language-mongodb linter linter-eslint linter-htmlhint linter-lesshint linter-ui-default markdown-writer minimap minimap-bookmarks minimap-cursorline minimap-linter minimap-pigments minimap-selection minimap-titles nav-panel-plus pigments project-manager  teletype todo tree-view-git-status v-bootstrap4
+
+$sudo npm i -g eslint htmlhint lesshint
+
+Asegurarse de que su archivo ~/.atom/config.cson contenga:
+
+  "linter-eslint":
+    advanced:
+      disableFSCache: true
+    autofix:
+      fixOnSave: true
+      ignoreFixableRulesWhileTyping: true
+    global:
+      globalNodePath: "/usr"
+      useGlobalEslint: true
+    lintHtmlFiles: true
+  "linter-htmlhint":
+    enabledScopes: [
+      "text.html.angular"
+      "text.html.basic"
+      "text.html.gohtml"
+      "text.html.jsp"
+      "text.html.mustache"
+      "text.html.php"
+      "text.html.ejs"
+    ]
