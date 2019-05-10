@@ -162,39 +162,5 @@ email status until they click the link in the confirmation email.`
       }
       return next();
     });
-  },
-
-  afterCreate: async function(user, next){
-    if (sails.config.opciones.verifyEmailAddresses) {
-      sails.log('** Notificando cuenta nueva');
-      var token2 = await sails.helpers.strings.random('url-friendly');
-      var update = {
-        emailProofToken: token2,
-        emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
-        emailStatus: 'unconfirmed'
-      };
-
-      await User.update({id:user.id},update).exec((err) => {
-        if(err){sails.log('☹ No se pudo actualizar emailProofToken al crear usario.');}
-      });
-
-      // Enviar email de notificación
-      notificaService.templateEmail({
-        to: user.emailAddress,
-        subject: 'Porfavor verifique su cuenta',
-        template: 'email-verify-account',
-        templateData: {
-          fullName: user.fullName,
-          token: token2
-        }
-      }).then((enviado) => {
-        sails.log.verbose('• Correo de bienvenida enviado...', enviado);
-      }, (err) => {
-        sails.log('☹ No se pudo enviar el correo de bienvenida:', err);
-      });
-    } else {
-      sails.log.verbose('⚠ Correo de verificación no enviado (opción desactivada)');
-    }
-    return next();
   }
 };
