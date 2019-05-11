@@ -29,6 +29,13 @@ module.exports.routes = {
   'GET  /password/forgot':      { action: 'entrance/view-forgot-password' },
   'GET  /password/new':         { action: 'entrance/view-new-password' },
   'GET  /signup':         { action: 'entrance/view-signup' },
+
+
+
+  'GET /vision':          { action: 'view-vision' },
+
+
+
   //api
   'PUT  /api/v1/entrance/login':                        { action: 'entrance/login' },
   'POST /api/v1/entrance/send-password-recovery-email': { action: 'entrance/send-password-recovery-email' },

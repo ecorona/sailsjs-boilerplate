@@ -37,6 +37,6 @@ module.exports.session = {
     return !!req.path.match(req._sails.LOOKS_LIKE_ASSET_RX);
   },
   adapter:'connect-mongo',
-  url: 'mongodb://mongodb:27017/' + process.env.DB_NAME,
+  url: 'mongodb://localhost:27017/' + process.env.DB_NAME,
   //si se va a usar docker, cambiar localhost por mongodb
 };

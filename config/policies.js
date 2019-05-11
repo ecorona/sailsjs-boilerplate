@@ -19,6 +19,8 @@ module.exports.policies = {
   'view-privacidad': true,
   'view-terminos': true,
 
+  'view-vision':true,
+
   'account/canales': true,
   'account/logout': true,
   'view-homepage-or-redirect': true,
