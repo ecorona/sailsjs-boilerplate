@@ -3,6 +3,8 @@ ng.config(['$httpProvider', '$provide', '$qProvider', '$sailsProvider', function
   $provide.factory('myHttpInterceptor', ['$q', function($q) {
     return {
       'request': function(config) {
+        // config/security.js csrf=true
+        // Si encontramos un token csrf de regreso en la vista, lo usarémos para las solicitudes.
         if(config.method !== 'GET' && SAILS_LOCALS._csrf){
           if(!config.data) {config.data = {};}
           config.data._csrf = SAILS_LOCALS._csrf;

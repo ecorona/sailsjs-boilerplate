@@ -65,9 +65,7 @@ module.exports = function defineCustomHook(sails) {
               res.locals.invitarMultiFactor = sails.config.opciones.invitarMultiFactor?'si':false;
               res.locals.isEmailVerificationRequired = sails.config.opciones.verifyEmailAddresses;
               res.locals.flashType = sails.config.opciones.flashType;
-              res.locals.appName = sails.config.custom.app.name;
-              res.locals.appVersion = sails.config.custom.app.version;
-              res.locals.appAuthor = sails.config.custom.app.author;
+              res.locals.app = sails.config.custom.app;
               // The `me` local is set explicitly to `undefined` here just to avoid having to
               // do `typeof me !== 'undefined'` checks in our views/layouts/partials.
               // > Note that, depending on the request, this may or may not be set to the
@@ -175,19 +173,13 @@ module.exports = function defineCustomHook(sails) {
                 sails.log.warn('The logged in user record has a `password` property, but it was still there after pruning off all properties that match `protect: true` attributes in the User model.  So, just to be safe, removing the `password` property anyway...');
                 delete sanitizedUser.password;
               }//ﬁ
+
               sanitizedUser.profilePicture = '';
               if(sanitizedUser.imageUploadFd){
                 sanitizedUser.profilePicture = url.resolve(sails.config.custom.baseUrl, '/api/v1/account/'+sanitizedUser.id+'/photo');
               }
 
               res.locals.me = _.omit(sanitizedUser, ['imageUploadFd','imageUploadMime']);
-              res.locals.appName = sails.config.custom.app.name;
-              res.locals.appVersion = sails.config.custom.app.version;
-              res.locals.appAuthor = sails.config.custom.app.author;
-
-              // Include information on the locals as to whether billing features
-              // are enabled for this app, and whether email verification is required.
-              res.locals.isEmailVerificationRequired = sails.config.opciones.verifyEmailAddresses;
 
               //se define a este nivel ya que tenemos a loggedInUser en el scope
               res.locals.tienePermiso = function(permisos){

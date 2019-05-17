@@ -45,6 +45,7 @@ actually logged in.  (If they weren't, then this action is just a no-op.)`,
     if (!this.req.wantsJSON) {
       throw {redirect: '/login'};
     } else {
+      FlashService.success(this.req,'Su sesión ha sido cerrada');
       return exits.success();
     }
 

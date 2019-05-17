@@ -2,7 +2,7 @@
 <html ng-app="angularjs-app">
 
 <head>
-  <title>Mi aplicación SailsJS</title>
+  <title><%-app.name%> <%-app.version%></title>
 
   <% /* Viewport tag for sensible mobile support */ %>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -34,7 +34,7 @@
           <img src="/images/sails.svg" height="21" alt="" class="float-left">
         </div>
         &nbsp;
-        Mi aplicación SailsJS
+        <%-app.name%> <%-app.version%>
       </a>
 
 
@@ -45,9 +45,7 @@
         <div class="nav-item dropdown d-none d-sm-block">
           <a class="nav-link dropdown-toggle" id="header-admin-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock" aria-hidden></i> Administración</a>
           <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
-            <%if(me.perfil==="admin"){%>
-              <a class="dropdown-item" href="/admin/configuracion"><i class="fa fa-cogs" aria-hidden></i> Configuración</a>
-            <%}%>
+            <a class="dropdown-item" href="/admin/configuracion"><i class="fa fa-cogs" aria-hidden></i> Configuración</a>
             <% if(me.perfil==="superadmin") {%>
               <a class="dropdown-item" href="/admin/users"><i class="fa fa-users" aria-hidden></i> Usuarios</a>
               <a class="dropdown-item" href="/admin/permisos"><i class="fas fa-unlock-alt" aria-hidden></i> Permisos</a>
@@ -163,7 +161,7 @@
         <small class="nav-item">
           <a href="/nosotros" class="nav-link text-info">
             <span class="d-none d-sm-inline">
-              <%-appName%> <%-appVersion%>
+              <%-app.name%> <%-app.version%>
             </span>
           </a>
         </small>
@@ -259,6 +257,7 @@
   <script src="/js/pages/privacidad.page.js"></script>
   <script src="/js/pages/terminos.page.js"></script>
   <script src="/js/pages/vision.page.js"></script>
+  <script src="/js/util/lib.js"></script>
   <!--SCRIPTS END-->
 </body>
 

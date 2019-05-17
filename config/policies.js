@@ -18,7 +18,6 @@ module.exports.policies = {
   'view-contacto': true,
   'view-privacidad': true,
   'view-terminos': true,
-
   'view-vision':true,
 
   'account/validate-mfa': ['is-logged-in'],

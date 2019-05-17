@@ -38,6 +38,7 @@
     "validateEmail": true,
     "JST": true,
     "io": true,
+    "alertifyFlash": true,
     "angular": true,
     "ng": true,
     "alertify": true,
