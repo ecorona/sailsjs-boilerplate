@@ -18,6 +18,15 @@ module.exports = {
       defaultsTo:'usuario',
       isIn:['usuario','admin','superadmin']
     },
+    mfa:{
+      type:'json',
+      defaultsTo:{
+        enrolled:false,
+        created:'',
+        secret:'',
+        otp:''
+      }
+    },
     imageUploadFd: {
       type: 'string',
       description: 'The Skipper file descriptor string uniquely identifying the uploaded image.',

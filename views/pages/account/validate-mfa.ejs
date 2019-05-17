@@ -1,0 +1,31 @@
+<div id="forgot-password" class="ng-cloak" ng-controller="validateMfaController" ng-cloak>
+  <div class="container">
+    <div class="forgot-form">
+
+
+    <titulo-pagina>Autenticación Multifactor</titulo-pagina>
+    <div class="row">
+      <div class="col-md-12">
+        <form ng-submit="trySubmit()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="000000" name="token" ng-model="formData.token" autofocus>
+            <p class="help-block" ng-if="formErrors.token">Debe ser de 6 dígitos. Este código lo obtendrá al escanear el código QR con una aplicacipón como Google Authenticator.</p>
+          </div>
+          <p class="text-danger" ng-if="cloudError && cloudError === 'invalidToken'">
+            El código que proporciónó no es válido, intentelo de nuevo.
+          </p>
+          <p class="text-danger" ng-if="cloudError && cloudError !== 'invalidToken'">
+            Ocurrió un error, porfavor intentelo mas tarde.
+          </p>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i ng-if="syncing" class="fa fa-spinner fa-spin" aria-hidden></i>
+            <span ng-if="!syncing">Validar</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

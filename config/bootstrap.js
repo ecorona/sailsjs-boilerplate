@@ -31,6 +31,7 @@ module.exports.bootstrap = async function(done) {
       flashType: 'alertify', // [alertify|alert]
       emailFromName: '',
       smtpUser: '',
+      invitarMultiFactor:false,
       smtpPassword: '',
       smtpHost: '',
       internalEmailAddress: '',

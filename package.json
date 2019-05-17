@@ -21,7 +21,8 @@
     "sails-hook-orm": "^2.0.0-16",
     "sails-hook-sockets": "^1.4.0",
     "sails-hook-uploads": "^0.4.1",
-    "sails-mongo": "^1.0.1"
+    "sails-mongo": "^1.0.1",
+    "speakeasy": "^2.0.0"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3",

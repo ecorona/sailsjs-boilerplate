@@ -75,6 +75,16 @@
       </div>
     </header>
 
+    <% if(invitarMultiFactor && me && url !='/account/multifactor' && (!me.mfa || !me.mfa.enrolled)) { %>
+    <div class="container">
+      <div class="alert alert-info mt-2" role="alert">
+        <p><i class="fa fa-lock"></i>
+          Su cuenta no tiene activada la seguridad que brinda la autenticación multifactor, es recomendable que la active, puede hacerlo dando click <a href="/account/multifactor">aqui</a>.
+        </p>
+      </div>
+    </div>
+    <% } %>
+
     <!-- Alert if email has not been confirmed -->
     <% if(me&&me.emailChangeCandidate) { %>
     <div class="container">
@@ -90,6 +100,51 @@
         Su correo electrónico necesita ser verificado.<br> Es posible que su cuenta tenga acceso limitado hasta que sea verificada mediante el correo electrónico que se envió a <strong>
           <%= me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress%></strong>.
       </div>
+    </div>
+    <% } %>
+
+    <% if (typeof flashMessages !== "undefined" && sails.config.opciones.flashType==='alert'){%>
+    <div class="container">
+    <% if (typeof flashMessages !== "undefined"  && flashMessages['error'] && flashMessages['error'].length > 0) {%>
+      <div class="alert alert-danger mt-2 flash-alert alert-dismissible fade show" role="alert">
+      <%flashMessages['error'].forEach((message) => { %>
+        <p><%=message%></p>
+      <% });%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+    <% if (typeof flashMessages !== "undefined"  && flashMessages['warning'] && flashMessages['warning'].length > 0) {%>
+      <div class="alert alert-warning mt-2 flash-alert alert-dismissible fade show" role="alert">
+      <%flashMessages['warning'].forEach((message) => { %>
+        <p><%=message%></p>
+      <% });%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+    <% if (typeof flashMessages !== "undefined"  && flashMessages['info'] && flashMessages['info'].length > 0) {%>
+      <div class="alert alert-info mt-2 flash-alert alert-dismissible fade show" role="alert">
+      <%flashMessages['info'].forEach((message) => { %>
+        <p><%=message%></p>
+      <% });%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+    <% if (typeof flashMessages !== "undefined"  && flashMessages['success'] && flashMessages['success'].length > 0) {%>
+      <div class="alert alert-success mt-2 flash-alert alert-dismissible fade show" role="alert">
+      <%flashMessages['success'].forEach((message) => { %>
+        <p><%=message%></p>
+      <% });%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
     </div>
     <% } %>
 

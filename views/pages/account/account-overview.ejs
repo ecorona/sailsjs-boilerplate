@@ -51,5 +51,16 @@
       </div>
     </div>
     <hr/>
+    <div class="row">
+      <div class="col-3">Autenticación Multifactor:</div>
+      <div class="col-3">
+        {{me.mfa.enrolled?'Si':'No'}}
+      </div>
+      <div class="col">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/multifactor">Configuración</a>
+        </span>
+      </div>
+    </div>
   </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

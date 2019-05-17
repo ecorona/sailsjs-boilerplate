@@ -28,6 +28,7 @@ module.exports = {
       'flashType',
       'emailFromName',
       'smtpUser',
+      'invitarMultiFactor',
       'smtpPassword',
       'smtpHost',
       'internalEmailAddress',

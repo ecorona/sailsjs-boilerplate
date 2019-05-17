@@ -118,6 +118,16 @@ and exposed as \`req.me\`.)`
       }
     }//ﬁ
 
+    //si el usuario tiene activada mfa, redireccionar a validar su codigo
+    if(userRecord.mfa && userRecord.mfa.enrolled){
+      this.req.session.mfaOk = false;
+      this.req.session.userId = userRecord.id;
+      return exits.success();
+    }
+
+    this.req.session.mfaOk = true;
+    this.req.session.mfaPassed = false;
+
     // Modify the active session instance.
     this.req.session.userId = userRecord.id;
 

@@ -57,12 +57,16 @@ module.exports.routes = {
   'GET  /account':               { action: 'account/view-account-overview' },
   'GET  /account/password':      { action: 'account/view-edit-password' },
   'GET  /account/profile':       { action: 'account/view-edit-profile' },
+  'GET  /account/multifactor':   { action: 'account/view-multifactor' },
+  'GET  /account/validate-mfa':  { view:  'pages/account/validate-mfa'},
 
   //api
   '/api/v1/account/logout':                          { action: 'account/logout' },
   '/logout':                                         '/api/v1/account/logout',
   'PUT  /api/v1/account/update-password':            { action: 'account/update-password' },
   'PUT  /api/v1/account/update-profile':             { action: 'account/update-profile' },
+  'PUT  /api/v1/account/validate-mfa':               { action: 'account/validate-mfa'},
+  'PUT  /api/v1/account/disable-mfa':                { action: 'account/disable-mfa' },
   'GET  /api/v1/account/canales':                    { action: 'account/canales' },
   'GET  /api/v1/account/:id/photo':                  { action: 'account/download-photo', skipAssets: false },
   'POST /api/v1/account/update-profile-picture':     { action: 'account/update-profile-picture' },

@@ -62,6 +62,7 @@ module.exports = function defineCustomHook(sails) {
               }
               res.locals.url = req.url||'/';
               res.locals._environment = sails.config.environment;
+              res.locals.invitarMultiFactor = sails.config.opciones.invitarMultiFactor?'si':false;
               res.locals.isEmailVerificationRequired = sails.config.opciones.verifyEmailAddresses;
               res.locals.flashType = sails.config.opciones.flashType;
               res.locals.appName = sails.config.custom.app.name;

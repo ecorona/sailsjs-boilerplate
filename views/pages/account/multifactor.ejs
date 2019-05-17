@@ -1,0 +1,70 @@
+<div id="security" ng-controller="multifactorController" ng-cloak class="ng-cloak">
+  <div class="container">
+    <titulo-pagina><i class="fa fa-lock" aria-hidden></i> Autenticación Multiple</titulo-pagina>
+    <div class="" ng-if="base32 && qrcode && !success">
+      <form ng-submit="trySubmit()">
+        <div class="row align-items-center">
+          <div class="col-md-4 text-center">
+            <h5>1.- Escanee el código QR</h5>
+            <img ng-src="{{qrcode}}" alt="QR" class="mx-auto d-block img-fluid">
+            <div class="small" style="word-break: break-all;">
+              Puede utilizar <b>Google Authenticator</b> para <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank" >Android</a> <br>o para <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank" >iOS</a>.
+              <!--{{base32}}-->
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">
+                <h5>2.- Introduzca el Código para validarlo. </h5>
+              </label>
+              <input type="text" class="form-control text-center" placeholder="000000" name="token" ng-model="formData.token">
+              <p class="help-block" ng-if="formErrors.token">Debe ser de 6 dígitos. Este código lo obtendrá al escanear el código QR con una aplicacipón como Google Authenticator.</p>
+            </div>
+          </div>
+          <div class="col text-center">
+            <h5>3.- Activar</h5>
+            Después de activar la autenticación de dos pasos, cada que inicie sesión se le solicitará un código.
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i ng-if="syncing" class="fa fa-spinner fa-spin" aria-hidden></i>
+              <span ng-if="!syncing"><i class="fa fa-lock" aria-hidden></i> Validar y Activar</span>
+            </button>
+            <br>
+            <a href="/account">Cancelar</a>
+            <hr>
+            <div ng-if="cloudError && cloudError === 'invalidToken'">
+              El código que proporciónó no es válido, intentelo de nuevo.
+            </div>
+            <div ng-if="cloudError && cloudError !== 'invalidToken'">
+              Ocurrió un error, porfavor intentelo mas tarde.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div ng-if="success">
+      <div class="jumbotron">
+        <h3>Autenticación Multiple Activada</h3>
+        <p>A partir de este momento, cada que inicie sesión se le pedirá un código que debe obtener de la misma aplicación móvil con la que escaneó el Código QR.</p>
+        <a href="/account" class="btn btn-primary">
+          <i class="fa fa-arrow-left" aria-hidden></i> Regresar a mi cuenta.
+        </a>
+      </div>
+    </div>
+    <div ng-if="me.mfa.enrolled" class="text-center">
+      <p>Actualmente cuenta con la protección activa de la autenticación múltiple.</p>
+      <p>Si desea desactivarla solo debe dar click en el botón de abajo.</p>
+      <hr>
+      <button type="button" class="btn btn-warning" ng-click="trySubmitDisable()">
+        Desactivar Autenticación Multiple
+      </button>
+      <br>
+      <br>
+      <a href="/account" class="btn btn-primary">
+        Regresar a mi cuenta.
+      </a>
+    </div>
+  </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
