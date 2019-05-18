@@ -5,6 +5,7 @@
   "description": "SICREDMUN - Santa María Tonameca",
   "keywords": [],
   "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/socket.io-redis": "^5.2.0",
     "async": "2.0.1",
     "connect-mongo": "^2.0.3",

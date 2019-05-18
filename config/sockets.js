@@ -11,6 +11,20 @@
 
 module.exports.sockets = {
 
+  /**/
+  adapter: '@sailshq/socket.io-redis',
+  adapterOptions: {
+    onRedisDisconnect: function() {
+      sails.hooks.panico.panic();
+    },
+    onRedisReconnect: function() {
+      sails.hooks.panico.chill();
+    }
+  },
+  url: 'redis://redis:6379/1',
+  //si se va a usar docker, cambiar localhost por redis
+  /**/
+
   /***************************************************************************
   *                                                                          *
   * `transports`                                                             *

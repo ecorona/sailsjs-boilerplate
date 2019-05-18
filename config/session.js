@@ -36,7 +36,20 @@ module.exports.session = {
   isSessionDisabled: function (req){
     return !!req.path.match(req._sails.LOOKS_LIKE_ASSET_RX);
   },
-  adapter:'connect-mongo',
-  url: 'mongodb://localhost:27017/' + process.env.DB_NAME,
+  //adapter:'connect-mongo',
+  //url: 'mongodb://mongodb:27017/' + process.env.DB_NAME,
   //si se va a usar docker, cambiar localhost por mongodb
+
+  //REDIS
+  /**/
+  adapter: '@sailshq/connect-redis',
+  url: 'redis://redis:6379/1',
+  //si se va a usar docker, cambiar localhost por redis
+  onRedisDisconnect: function() {
+    sails.hooks.panico.panic();
+  },
+  onRedisReconnect: function() {
+    sails.hooks.panico.chill();
+  },
+  /**/
 };

@@ -13,7 +13,9 @@ services:
     build: ./api
     links:
       - mongodb:mongodb
+      - redis:redis
     depends_on:
+      - redis
       - mongodb
 
   mongodb:
@@ -24,3 +26,10 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+
+  redis:
+    container_name: redis
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
