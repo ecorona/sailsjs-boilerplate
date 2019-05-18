@@ -1,6 +1,12 @@
 # Iniciar:
 
-## Crear archivo: .env:
+## Clonar el repositorio:
+```bash
+foo@bar:~$ git clone https://git.snell.com.mx/ecorona/sailsjs-boilerplate.git
+foo@bar:~$ cd sailsjs-boilerplate
+```
+
+## Crear archivo: .env en la raíz del proyecto:
 ```bash
 #password inicial para las cuentas creadas
 PASSWORD_INICIAL=zarpemos!
@@ -13,42 +19,16 @@ LOG_LEVEL=verbose
 
 ```
 
-## Clonar el repositorio:
+## Iniciar localmente (Ver instrucciones en config/datastores.js, config/sessions.js y config/sockets.js:
 ```bash
-foo@bar:~$ git clone https://git.snell.com.mx/ecorona/sailsjs-boilerplate.git
-foo@bar:~$ cd sailsjs-boilerplate
 foo@bar:~$ npm install
 foo@bar:~$ sails lift
 ```
+
 ---
-#### Con Docker:
+#### Con Docker (Debes tener docker-compose instalado):
 ```bash
-foo@bar:~$ git clone https://git.snell.com.mx/ecorona/sailsjs-boilerplate.git
-foo@bar:~$ cd sailsjs-boilerplate
-foo@bar:~$ npm i
 foo@bar:~$ cd docker
 foo@bar:~$ docker-compose build
-```
-Editar: **config/datastores.js**
-Cambiar:
-```js
-53:   url: 'mongodb://localhost:27017/' + process.env.DB_NAME,
-```
-Por:
-```js
-53:   url: 'mongodb://mongodb:27017/' + process.env.DB_NAME,
-```
----
-Editar: **config/session.js**
-Cambiar:
-```js
-40:   url: 'mongodb://localhost:27017/' + process.env.DB_NAME,
-```
-Por:
-```js
-40:   url: 'mongodb://mongodb:27017/' + process.env.DB_NAME,
-```
-#### Iniciar:
-```bash
 foo@bar:~$ docker-compose up
 ```
