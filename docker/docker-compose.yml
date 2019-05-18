@@ -15,8 +15,8 @@ services:
       - mongodb:mongodb
       - redis:redis
     depends_on:
-      - redis
       - mongodb
+      - redis
 
   mongodb:
     container_name: mongodb
@@ -26,6 +26,8 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+    depends_on:
+      - redis
 
   redis:
     container_name: redis
