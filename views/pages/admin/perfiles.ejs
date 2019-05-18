@@ -1,0 +1,67 @@
+<div id="users" ng-controller="perfilesController" ng-cloak ng-init="init()">
+<!--
+  ██    ██ ███████ ██    ██  █████  ██████  ██  ██████  ███████
+  ██    ██ ██      ██    ██ ██   ██ ██   ██ ██ ██    ██ ██
+  ██    ██ ███████ ██    ██ ███████ ██████  ██ ██    ██ ███████
+  ██    ██      ██ ██    ██ ██   ██ ██   ██ ██ ██    ██      ██
+   ██████  ███████  ██████  ██   ██ ██   ██ ██  ██████  ███████
+-->
+
+  <div class="container">
+    <titulo-pagina>
+      Perfiles
+      <button type="button" name="button" class="btn btn-default btn-small pull-right" title="Agregar Perfil" ng-click="showModal()">
+        <i class="fa fa-plus-square"></i>
+      </button>
+    </titulo-pagina>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre del Perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="perfil in perfiles">
+          <td>{{perfil.nombre}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--
+  ███    ███  ██████  ██████   █████  ██
+  ████  ████ ██    ██ ██   ██ ██   ██ ██
+  ██ ████ ██ ██    ██ ██   ██ ███████ ██
+  ██  ██  ██ ██    ██ ██   ██ ██   ██ ██
+  ██      ██  ██████  ██████  ██   ██ ███████
+  -->
+  <div class="modal" id="myModalPerfil">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Perfil</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="">Nombre del Perfil</label>
+                <input type="text" class="form-control" ng-model="perfil.nombre">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" name="button" title="Guardar" class="btn btn-primary btn-small" ng-click="guardar()">
+            <i class="fa fa-save"></i>
+          </button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

@@ -1,0 +1,93 @@
+<div id="users" ng-controller="definicionesControllerView" ng-cloak ng-init="init()">
+
+  <div class="container">
+    <titulo-pagina>
+      <div class="row">
+        <div class="col-11">Definiciones</div>
+        <div class="col-1">
+          <button type="button" name="button" class="btn btn-default btn-small pull-right" title="Agregar Definiciones" ng-click="showModal()">
+            <i class="fa fa-plus-square"></i>
+          </button>
+        </div>
+      </div>
+    </titulo-pagina>
+  </div>
+  <div class="container">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Tipo</td>
+            <th>Nombre</th>
+            <th>Título Definción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="definicion in definiciones">
+          <td>{{definicion.tipo}}</td>
+          <td>{{definicion.nombre}}</td>
+          <td>{{definicion.titulo}}</td>
+          <td>
+            <button type="button" name="button" title="Editar" class="btn btn-warning btn-sm"  ng-click="showModal(definicion)">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button type="button" name="button" title="Borrar" class="btn btn-danger btn-sm" ng-click="borrarDefinicion(definicion.id)">
+                <i class="fa fa-trash"></i>
+            </button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!--
+███    ███  ██████  ██████   █████  ██
+████  ████ ██    ██ ██   ██ ██   ██ ██
+██ ████ ██ ██    ██ ██   ██ ███████ ██
+██  ██  ██ ██    ██ ██   ██ ██   ██ ██
+██      ██  ██████  ██████  ██   ██ ███████
+-->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Definición</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Tipo:</span>
+                  </div>
+                  <input type="text" class="form-control" name="tipo" ng-model="definicion.tipo"  placeholder="Nombre" ng-disabled="bloqueado" required>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Nombre:</span>
+                  </div>
+                  <input type="text" class="form-control" name="tipo" ng-model="definicion.nombre"  placeholder="Nombre" ng-disabled="bloqueado" required>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Titulo Definición:</span>
+                  </div>
+                  <input type="text" class="form-control" name="nombre" ng-model="definicion.titulo"  placeholder="Nombre Definción" ng-disabled="bloqueado" required>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-small" title="Guardar" ng-click="guardar()">
+           <i class="fa fa-save"></i></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar y Regresar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

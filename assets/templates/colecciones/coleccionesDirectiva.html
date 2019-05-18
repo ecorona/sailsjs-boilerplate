@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="form-group">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputColeccion">Tipo de catálogo</label>
+          <select class="form-control" name="coleccion" id="inputColeccion" ng-model="catalogo.coleccion" ng-disabled="bloqueado" required>
+          <option value="">--Elige una opción--</option>
+          <option value="periodicidad">Periodicidad (Conceptos)</option>
+          <option value="unidades">Unidades (Conceptos)</option>
+          <option value="tiposervicio">Tipo de servicio(Conceptos)</option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputEtiqueta">Nombre</label>
+          <input type="text" class="form-control" id="inputEtiqueta" ng-model="catalogo.etiqueta" placeholder="Nombre" ng-disabled="bloqueado" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputMunicipio">Valor</label>
+          <input type="number" class="form-control" id="inputMunicipio" ng-model="catalogo.valor" placeholder="valor" ng-disabled="bloqueado">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="InputOrden">Orden</label>
+          <input type="number" class="form-control" id="InputOrden" ng-model="catalogo.orden"  ng-disabled="bloqueado" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="InputCateforia">Categoria</label>
+          <input type="text" class="form-control" id="InputCateforia" ng-model="catalogo.categoria"  ng-disabled="bloqueado" required>
+        </div>
+     </div>
+  </form>
+  </div>
+</div>

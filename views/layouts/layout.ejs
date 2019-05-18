@@ -46,6 +46,9 @@
           <a class="nav-link dropdown-toggle" id="header-admin-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock" aria-hidden></i> Administración</a>
           <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
             <a class="dropdown-item" href="/admin/configuracion"><i class="fa fa-cogs" aria-hidden></i> Configuración</a>
+            <a class="dropdown-item" href="/admin/perfiles"><i class="fa fa-cogs" aria-hidden></i> Perfiles</a>
+            <a  class="dropdown-item" href="/admin/definiciones"><i class="fa fa-key" aria-hidden></i> Deficiones</a>
+            <a  class="dropdown-item" href="/catalogos/unidades"><i class="fas fa-gavel" aria-hidden></i> Unidades</a>
             <% if(me.perfil==="superadmin") {%>
               <a class="dropdown-item" href="/admin/users"><i class="fa fa-users" aria-hidden></i> Usuarios</a>
               <a class="dropdown-item" href="/admin/permisos"><i class="fas fa-unlock-alt" aria-hidden></i> Permisos</a>
@@ -226,6 +229,8 @@
   <script src="/js/directives/sistema/file-modelDirectiva.js"></script>
   <script src="/js/directives/sistema/titulo-paginaDirectiva.js"></script>
   <script src="/js/directives/users/usuariosDirectiva.js"></script>
+  <script src="/js/factorys/catalogos/catalogosFactory.js"></script>
+  <script src="/js/factorys/perfiles/perfilesFactory.js"></script>
   <script src="/js/factorys/permisos/permisosFactory.js"></script>
   <script src="/js/factorys/usuarios/usuariosFactory.js"></script>
   <script src="/js/filters/generalesFilters.js"></script>

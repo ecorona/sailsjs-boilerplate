@@ -1,0 +1,76 @@
+<div id="catalogos" ng-cloak ng-controller="catalogosController" class="ng-cloak" ng-init="init()">
+  <div class="container">
+    <titulo-pagina>Catalogo {{definicion.titulo}}</titulo-pagina>
+    <div ng-if="catalogos">
+      <div class="row">
+        <div class="col-12">
+          <a href="/catalogos/{{definicion.nombre}}/nuevo" title="Nuevo Registro" class="btn btn-xs btn-primary float-right">
+            <i class="fa fa-plus-circle" aria-hidden></i>
+          </a>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="catalogo in catalogos">
+                <td>
+                  <a ng-href="/catalogos/{{catalogo.coleccion}}/{{catalogo.id}}">
+                    {{catalogo.etiqueta}}
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-xs btn-danger float-right" ng-click="borrarRegistro(catalogo.id)">
+                    <i class="far fa-trash-alt" aria-hidden></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div ng-if="catalogo && !catalogos">
+      <div class="row">
+        <div class="col-12">
+          <h3><span> <b>Catalogo</b> </span></h3>
+        </div>
+      </div>
+      <form name="formCat">
+        <div class="row separado">
+          <div class="col-4">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" ng-model="catalogo.etiqueta" required>
+            </div>
+          </div>
+          <div class="col-4" >
+            <div class="form-group">
+              <label> Orden</label>
+              <input type="number" class="form-control" ng-model="catalogo.orden" required>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" name="button" title="Guardar Registro" class="btn btn-xs btn-primary float-right" ng-click="saveElemento()" >
+            <i class="far fa-save" aria-hidden></i> Guardar
+          </button>
+          <a href="/catalogos/{{definicion.nombre}}" title="Cancelar" class="btn btn-xs btn-danger float-right" ng-click="cancelar()" >
+            <i class="fa fa-ban" aria-hidden></i>
+            Cancelar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- /* Exponer datos de variables del servidor como window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

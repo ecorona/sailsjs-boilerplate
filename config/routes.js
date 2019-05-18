@@ -19,20 +19,17 @@ module.exports.routes = {
   */
   //views
   'GET  /':                     { action: 'view-homepage-or-redirect' },
-  'GET  /nosotros':        { action: 'view-nosotros' },
-  'GET  /contacto':        { action: 'view-contacto' },
-  'GET  /privacidad':        { action: 'view-privacidad' },
-  'GET  /terminos':        { action: 'view-terminos' },
+  'GET  /nosotros':             { action: 'view-nosotros' },
+  'GET  /contacto':             { action: 'view-contacto' },
+  'GET  /privacidad':           { action: 'view-privacidad' },
+  'GET  /terminos':             { action: 'view-terminos' },
   'GET  /login':                { action: 'entrance/view-login' },
   'GET  /email/confirm':        { action: 'entrance/confirm-email' },
   'GET  /email/confirmed':      { view:   'pages/entrance/confirmed-email' },
   'GET  /password/forgot':      { action: 'entrance/view-forgot-password' },
   'GET  /password/new':         { action: 'entrance/view-new-password' },
-  'GET  /signup':         { action: 'entrance/view-signup' },
-
-
-
-  'GET /vision':          { action: 'view-vision' },
+  'GET  /signup':               { action: 'entrance/view-signup' },
+  'GET /vision':                { action: 'view-vision' },
 
 
 
@@ -41,9 +38,20 @@ module.exports.routes = {
   'POST /api/v1/entrance/send-password-recovery-email': { action: 'entrance/send-password-recovery-email' },
   'POST /api/v1/entrance/update-password-and-login':    { action: 'entrance/update-password-and-login' },
   'POST /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
-  'POST /api/v1/entrance/signup':          { action: 'entrance/signup' },
+  'POST /api/v1/entrance/signup':                       { action: 'entrance/signup' },
 
-
+  /*
+  ██████  ██████  ███████ ███████ ██ ██      ███████ ███████
+  ██   ██ ██   ██ ██      ██      ██ ██      ██      ██
+  ██████  ██████  █████   █████   ██ ██      █████   ███████
+  ██      ██   ██ ██      ██      ██ ██      ██           ██
+  ██      ██   ██ ███████ ██      ██ ███████ ███████ ███████
+  */
+  //view
+  'GET  /admin/perfiles':                     { action: 'admin/perfiles/view-perfiles' },
+  //api
+  'GET  /api/v1/admin/perfiles/get':          { action: 'admin/perfiles/get' },
+  'POST /api/v1/admin/perfiles/save':         { action: 'admin/perfiles/save' },
 
   /*
    █████   ██████  ██████  ██████  ██    ██ ███    ██ ████████
@@ -80,18 +88,53 @@ module.exports.routes = {
   ██   ██ ██████  ██      ██ ██ ██   ████
   */
   //view
-  'GET  /admin/users':                       { action: 'admin/users/view-users' },
-  'GET  /admin/configuracion':          { action: 'admin/configuracion/view-configuracion' },
+  'GET  /admin/users':                            { action: 'admin/users/view-users' },
+  'GET  /admin/configuracion':                    { action: 'admin/configuracion/view-configuracion' },
   //api
-  'POST /api/v1/admin/users/getall':               { action: 'admin/users/getall'},
-  'POST /api/v1/admin/users/save':                 { action: 'admin/users/save'},
-  'POST /api/v1/admin/users/toogle-permiso':       { action: 'admin/users/toogle-permiso' },
-  'POST /api/v1/admin/configuracion/save':         { action: 'admin/configuracion/save' },
+  'POST /api/v1/admin/users/getall':              { action: 'admin/users/getall'},
+  'POST /api/v1/admin/users/save':                { action: 'admin/users/save'},
+  'POST /api/v1/admin/users/toogle-permiso':      { action: 'admin/users/toogle-permiso' },
+  'POST /api/v1/admin/configuracion/save':        { action: 'admin/configuracion/save' },
+  /*
+  ██████  ███████ ██████  ███    ███ ██ ███████  ██████  ███████
+  ██   ██ ██      ██   ██ ████  ████ ██ ██      ██    ██ ██
+  ██████  █████   ██████  ██ ████ ██ ██ ███████ ██    ██ ███████
+  ██      ██      ██   ██ ██  ██  ██ ██      ██ ██    ██      ██
+  ██      ███████ ██   ██ ██      ██ ██ ███████  ██████  ███████
+  */
 
   //views
-  'GET  /admin/permisos':                 { action: 'admin/permisos/view-permisos' },
+  'GET  /admin/permisos':                         { action: 'admin/permisos/view-permisos' },
   //api
   'GET  /api/v1/admin/permisos/get':              { action: 'admin/permisos/get' },
   'POST /api/v1/admin/permisos/save':             { action: 'admin/permisos/save' },
 
+  /*
+   ██████  █████  ████████  █████  ██       ██████   ██████   ██████  ███████
+  ██      ██   ██    ██    ██   ██ ██      ██    ██ ██       ██    ██ ██
+  ██      ███████    ██    ███████ ██      ██    ██ ██   ███ ██    ██ ███████
+  ██      ██   ██    ██    ██   ██ ██      ██    ██ ██    ██ ██    ██      ██
+   ██████ ██   ██    ██    ██   ██ ███████  ██████   ██████   ██████  ███████
+  */
+  //views
+  'GET  /catalogos/:coleccion?/:id?':         { action: 'admin/catalogos/view-catalogos' },
+  //api
+  'POST  /api/v1/admin/catalogos/getall':     { action: 'admin/catalogos/getall' },
+  'POST /api/v1/admin/catalogos/save':        { action: 'admin/catalogos/save' },
+  'POST /api/v1/admin/catalogos/borrar':      { action: 'admin/catalogos/borrar' },
+
+  /*
+  ██████  ███████ ███████ ██ ███    ██ ██  ██████ ██  ██████  ███    ██ ███████ ███████
+  ██   ██ ██      ██      ██ ████   ██ ██ ██      ██ ██    ██ ████   ██ ██      ██
+  ██   ██ █████   █████   ██ ██ ██  ██ ██ ██      ██ ██    ██ ██ ██  ██ █████   ███████
+  ██   ██ ██      ██      ██ ██  ██ ██ ██ ██      ██ ██    ██ ██  ██ ██ ██           ██
+  ██████  ███████ ██      ██ ██   ████ ██  ██████ ██  ██████  ██   ████ ███████ ███████
+  */
+  //views
+  'GET  /admin/definiciones':                     { action: 'admin/definiciones/view-definiciones' },
+  //api
+  'GET  /api/v1/admin/definiciones/getall':       { action: 'admin/definiciones/getall' },
+  'POST /api/v1/admin/definiciones/save':         { action: 'admin/definiciones/save' },
+  'POST /api/v1/admin/definiciones/eliminar':     { action: 'admin/definiciones/eliminar'},
+  'GET  /api/v1/admin/definiciones/get-ones':     { action: 'admin/definiciones/get-ones' },
 };

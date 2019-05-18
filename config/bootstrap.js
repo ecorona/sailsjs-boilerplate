@@ -51,6 +51,27 @@ module.exports.bootstrap = async function(done) {
     sails.log(`★ Configuración generada (JSON)...`);
   }
 
+  if(await Definiciones.count()===0){
+    sails.log('◊ Generando Definiciones.');
+    await Definiciones.createEach(
+      sails.config.colecciones.definiciones
+    );
+  }
+
+  if(await Catalogos.count()===0){
+    sails.log('◊ Generando catalogos.');
+    await Catalogos.createEach(
+      sails.config.colecciones.catalogos
+    );
+  }
+
+  if (!await Perfiles.count()) {
+    sails.log('◊ Generando perfiles.');
+    await Perfiles.createEach(
+        sails.config.colecciones.perfiles
+    ).fetch();
+  }
+
   //verificar que existan los permisos que usamos
   if(await Permisos.count()===0){
     sails.log('◊ Generando permisos.');
