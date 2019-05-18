@@ -51,6 +51,6 @@ module.exports.datastores = {
     ***************************************************************************/
     adapter: 'sails-mongo',
     url: 'mongodb://mongodb:27017/' + process.env.DB_NAME,
-    //si se va a usar docker, cambiar localhost por mongodb
+    //si no vas a usar docker, cambiar mongodb por el host de mongo a usar
   }
 };

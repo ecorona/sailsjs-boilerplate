@@ -22,7 +22,7 @@ module.exports.sockets = {
     }
   },
   url: 'redis://redis:6379/1',
-  //si se va a usar docker, cambiar localhost por redis
+  //si no vas a usar docker, cambiar redis por el host deseado
   /**/
 
   /***************************************************************************
