@@ -93,6 +93,7 @@ module.exports.bootstrap = async function(done) {
           password: await sails.helpers.passwords.hashPassword(sails.config.custom.firstPassword)
         }
     );
+    sails.log('◊ Password: '+sails.config.custom.firstPassword);
   }
   // si no existe el usuario admin lo creamos
   if (await User.count({emailAddress: 'admin@misitio.com'})===0) {
@@ -106,7 +107,9 @@ module.exports.bootstrap = async function(done) {
           isSuperAdmin: false,
           perfil:'admin',
           password: await sails.helpers.passwords.hashPassword(sails.config.custom.firstPassword)
-        });
+        }
+    );
+    sails.log('◊ Password: '+sails.config.custom.firstPassword);
   }
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
