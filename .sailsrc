@@ -1,7 +1,7 @@
 {
   "generators": {
     "modules": {
-      "page": "./sails-generate-page"
+      "page": "sails-generate-angularjs"
     }
   },
   "_generatedWith": {
