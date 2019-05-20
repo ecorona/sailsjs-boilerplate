@@ -81,7 +81,7 @@ module.exports.bootstrap = async function(done) {
   }
   // si no existe el usuario superadmin lo creamos
   if (await User.count({emailAddress: 'super@misitio.com'})===0) {
-    sails.log('◊ Generando usuario super...');
+    sails.log('◊ Generando usuario super@misitio.com...');
     await User.create(
         {
           permisos: [ 'ver_usuarios','editar_usuarios','configuracion'],
@@ -97,7 +97,7 @@ module.exports.bootstrap = async function(done) {
   }
   // si no existe el usuario admin lo creamos
   if (await User.count({emailAddress: 'admin@misitio.com'})===0) {
-    sails.log('◊ Generando usuario admin...');
+    sails.log('◊ Generando usuario admin@misitio.com...');
     await User.create(
         {
           permisos : ['configuracion'],
