@@ -27,7 +27,7 @@ foo@bar:~$ sails lift
 
 ---
 
-#### Iniciar con Docker (Debes tener docker-compose instalado):
+### Iniciar con Docker (Debes tener docker-compose instalado):
 ```bash
 foo@bar:~$ cd docker
 foo@bar:~$ docker-compose build
