@@ -19,17 +19,23 @@ LOG_LEVEL=verbose
 
 ```
 
-### Iniciar localmente (Ver instrucciones en config/datastores.js, config/sessions.js y config/sockets.js:
-```bash
-foo@bar:~$ npm install
-foo@bar:~$ sails lift
-```
-
----
-
 ### Iniciar con Docker (Debes tener docker-compose instalado):
+
+Configuración incluye MongoDB y Redis.
+
 ```bash
 foo@bar:~$ cd docker
 foo@bar:~$ docker-compose build
 foo@bar:~$ docker-compose up
+```
+
+---
+
+### Iniciar localmente (Ver instrucciones en config/datastores.js, config/sessions.js y config/sockets.js:
+
+Cuando ya tienes tu propia configuracion de BD y Caché.
+
+```bash
+foo@bar:~$ npm install
+foo@bar:~$ sails lift
 ```
