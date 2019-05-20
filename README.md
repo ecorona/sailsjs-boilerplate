@@ -2,7 +2,7 @@
 
 ## Clonar el repositorio:
 ```bash
-foo@bar:~$ git clone https://git.snell.com.mx/ecorona/sailsjs-boilerplate.git
+foo@bar:~$ git clone https://github.com/ecorona/sailsjs-boilerplate.git
 foo@bar:~$ cd sailsjs-boilerplate
 ```
 
@@ -19,14 +19,15 @@ LOG_LEVEL=verbose
 
 ```
 
-## Iniciar localmente (Ver instrucciones en config/datastores.js, config/sessions.js y config/sockets.js:
+### Iniciar localmente (Ver instrucciones en config/datastores.js, config/sessions.js y config/sockets.js:
 ```bash
 foo@bar:~$ npm install
 foo@bar:~$ sails lift
 ```
 
 ---
-#### Con Docker (Debes tener docker-compose instalado):
+
+### Iniciar con Docker (Debes tener docker-compose instalado):
 ```bash
 foo@bar:~$ cd docker
 foo@bar:~$ docker-compose build
