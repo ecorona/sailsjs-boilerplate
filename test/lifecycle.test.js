@@ -13,7 +13,6 @@ var supertest;
 var agent;
 var autenticado;
 var csrfToken;
-var ciudadano;
 var testUser;
 
 /**
