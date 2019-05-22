@@ -14,7 +14,7 @@ module.exports.custom = {
     version:'0.0.1',
     author:'@yomero'
   },
-
+  jwtSecret: process.env.JWT_SECRET||'this should be a random string',
   firstPassword: process.env.PASSWORD_INICIAL||'12345678',
   /**************************************************************************
   *                                                                         *

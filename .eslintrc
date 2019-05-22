@@ -42,6 +42,7 @@
     "Contadores": true,
     "Perfiles": true,
     "sails": true,
+    "jwt": true,
     "Configuracion": true,
     "FlashService": true,
     "_": true,

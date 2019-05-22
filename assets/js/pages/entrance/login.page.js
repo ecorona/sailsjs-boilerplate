@@ -3,6 +3,8 @@ ng.controller('loginController', ['$rootScope', '$scope', '$http',
     // Attach any initial data from the server.
     _.extend($scope, SAILS_LOCALS);
 
+    localStorage.removeItem('jwt');
+
     $scope.syncing = false;
 
     // Form data

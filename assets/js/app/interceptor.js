@@ -9,13 +9,23 @@ ng.config(['$httpProvider', '$provide', '$qProvider', '$sailsProvider', function
           if(!config.data) {config.data = {};}
           config.data._csrf = SAILS_LOCALS._csrf;
         }
+        //si hay jwt, lo usamos en la solicitud
+        const jwt = localStorage.getItem('jwt');
+        if(jwt){
+          if(!config.headers) {config.headers={};}
+          config.headers.authorization = 'Bearer '+ jwt;
+        }
+
         return config;
       },
       'requestError': function(rejection) {
         return $q.reject(rejection);
       },
       'response': function(response) {
-        if(response._csrf) { SAILS_LOCALS._csrf = response._csrf; }
+        //si en la respuesta viene un _csrf, lo tomamos
+        if(response.data && response.data._csrf) { SAILS_LOCALS._csrf = response.data._csrf; }
+        //si en la respuesta viene un jwt, lo almacenamos para usarse en zonas donde sea necesario
+        if(response.data && response.data.jwt) { SAILS_LOCALS.jwt = response.data.jwt; localStorage.setItem('jwt', response.data.jwt); }
         return response;
       },
       'responseError': function(rejection) {

@@ -130,7 +130,7 @@ module.exports = function defineCustomHook(sails) {
             var sanitizedFields = ['password', 'passwordResetToken', 'passwordResetTokenExpiresAt', 'stripeCustomerId', 'emailProofToken', 'emailProofTokenExpiresAt'];
 
             req.me = _.omit(loggedInUser, sanitizedFields);
-
+            sails.log.verbose('Identidad de solicitud creada en hook custom.');
             // If our "lastSeenAt" attribute for this user is at least a few seconds old, then set it
             // to the current timestamp.
             //

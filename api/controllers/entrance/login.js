@@ -134,8 +134,10 @@ and exposed as \`req.me\`.)`
     //mandar un socket...
     sails.sockets.broadcast('app', 'login',userRecord.fullName);
 
+    var token = jwt.issue({id: userRecord.id });
+    sails.log.verbose('jwt generado:', token);
     // Send success response (this is where the session actually gets persisted)
-    return exits.success();
+    return exits.success({jwt: token});
 
   }
 
