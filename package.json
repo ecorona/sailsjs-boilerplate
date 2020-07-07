@@ -15,7 +15,7 @@
     "moment": "^2.24.0",
     "node": "8.15.1",
     "nodemailer": "^5.1.1",
-    "npm": "^6.13.4",
+    "npm": "^6.14.6",
     "qrcode": "^1.3.3",
     "sails": "^1.2.2",
     "sails-generate-angularjs": "^1.0.0",
